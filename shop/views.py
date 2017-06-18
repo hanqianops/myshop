@@ -23,9 +23,8 @@ def producr_detail(request, id, slug):
     """
     检索和展示单一的产品
     """
-    print('path--->',request.path)
 
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    print(product,'ssss')
+    cart_product_form = CartAddProductForm()
 
     return render(request, "shop/product/detail.html", locals())

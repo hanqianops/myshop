@@ -39,9 +39,13 @@ def cart_remove(request, product_id):
     return  redirect("cart:cart_detail")
 
 def cart_detail(request):
-    """
-    展示购物车和其中的物品
-    """
     cart = Cart(request)
-    return render(request, "cart/detail.html", locals())
+    for item in cart:
+        # 每一个购物车中的物品创建了 CartAddProductForm 实例来允许用户改变产品的数量。
+        # 把表单和当前物品数量一同初始化，然后把 update 字段设为 True ，
+        # 这样当提交表单到 cart_add 视图时，当前的数量就被新的数量替换了。
+        item['update_quantity_form'] = CartAddProductForm(
+                                    initial={'quantity': item['quantity'],
+                                    'update': True})
+    return render(request, 'cart/detail.html', {'cart': cart})
 

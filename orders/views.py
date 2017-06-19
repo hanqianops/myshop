@@ -3,6 +3,8 @@ from .models import Order
 from .models import OrderItem
 from .forms import OrderCreateForm
 from  cart.cart import Cart
+from .tasks import order_created
+
 from django.views.generic import View
 
 
@@ -17,8 +19,8 @@ def order_create(request):
                     product=item['product'],
                     price=item['price'],
                     quantity=item['quantity'])
-            # clear the cart
-            cart.clear()
+            cart.clear()   # 清楚购物车
+            order_created.delay(order.id)  # 调用异步任务
             return render(request,
                 'orders/order/created.html',
                 {'order': order})

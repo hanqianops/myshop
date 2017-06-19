@@ -25,7 +25,7 @@ SECRET_KEY = 'c63=g$cy7xkylf_*a5x3bjhq5ya0^-%9q3&pa7+!9syn)qpd^c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -105,22 +105,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 CART_SESSION_ID = 'cart'  # 用于我们的会话中来储存购物车。因为 Django 的会话对于每个访问者是独立的,我们可以在所有的会话中使用相同的会话键。
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'   # 发送邮件
+
+
 MEDIA_URL = '/static/media/'   # 图片访问路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')  # 图片保存路径，MEDIA_ROOT+upload_to
 

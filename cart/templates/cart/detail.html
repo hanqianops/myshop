@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>Your shopping cart</h1>
-    <table class="cart">
+    <table class="table">
         <thead>
         <tr>
             <th>Image</th>
@@ -36,7 +36,7 @@
                         <form action="{% url "cart:cart_add" product.id %}" method="post">
                             {{ item.update_quantity_form.quantity }}
                             {{ item.update_quantity_form.update }}
-                            <input type="submit" value="Update">
+                            <input type="submit" value="更新数量">
                             {% csrf_token %}
                         </form>
                     </td>
@@ -54,7 +54,7 @@
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
-        <a href="#" class="button">Checkout</a>
+        <a href="{% url "shop:product_list" %}" class="button light">继续购物</a>
+        <a href="{% url "orders:order_create" %}" class="button"> 结账 </a>
     </p>
 {% endblock %}

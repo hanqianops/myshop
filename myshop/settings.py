@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
-    'cart'
+    'cart',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',   # 模板上下文处理器，可以在任何地方使用该上下文
             ],
         },
     },
@@ -123,6 +125,6 @@ MEDIA_URL = '/static/media/'   # 图片访问路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')  # 图片保存路径，MEDIA_ROOT+upload_to
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+STATICFILES_DIRS=(
+    os.path.join(BASE_DIR,"static"),
 )

@@ -18,7 +18,6 @@ class Cart(object):
         # 我们也能简化获取任意购物车物品数据的步骤。
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
-            # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
@@ -61,8 +60,7 @@ class Cart(object):
 
     def __iter__(self):
         """
-        Iterate over the items in the cart and get the products
-        from the database.
+        迭代购物车当中的物品，然后获取相应的 Product 实例
         """
         product_ids = self.cart.keys()
         # get the product objects and add them to the cart

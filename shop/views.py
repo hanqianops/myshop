@@ -8,13 +8,10 @@ def product_list(request, category_slug=None):
     列出所有产品或者是筛选后的产品
     """
     category = None
-    print(category_slug)
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)  # 检索出可用产品
     if category_slug:
-        print(category_slug)
         category = get_object_or_404(Category, slug=category_slug)
-        print(category)
         products = products.filter(category=category)  # 指定类型的产品
 
     return render(request, "shop/product/list.html", locals())
@@ -28,3 +25,7 @@ def producr_detail(request, id, slug):
     cart_product_form = CartAddProductForm()
 
     return render(request, "shop/product/detail.html", locals())
+
+def test(r):
+    gg = "hhh"
+    return render(r,"test.html", locals())

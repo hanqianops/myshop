@@ -5,21 +5,32 @@
     <meta charset="UTF-8">
     <title>{% block title %}My shop{% endblock %}</title>
     <script src="{% static "bootstrap-3.3.7/jquery-1.12.4.js" %}"></script>
-    <link href="{% static "bootstrap-3.3.7/css/bootstrap-theme.css" %}" rel="stylesheet">
-<link href="{% static "css/blog.css" %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
-    <div id="header">
-        <a href="/" class="logo">My shop</a>
+<div id="header">
+    <a href="/" class="logo">My shop</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Your cart:
+                <a href="{% url "cart:cart_detail" %}">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    ${{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Your cart is empty.
+            {% endif %}
+        {% endwith %}
     </div>
-    <div id="subheader">
-        <div class="cart">
-            Your cart is empty.
-        </div>
-    </div>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+</div>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>

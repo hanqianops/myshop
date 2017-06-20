@@ -26,6 +26,8 @@ def producr_detail(request, id, slug):
 
     return render(request, "shop/product/detail.html", locals())
 
-def test(r):
-    gg = "hhh"
-    return render(r,"test.html", locals())
+# from orders.tasks import add
+# def test(r):
+#     f = add.delay(22,33)
+#     print(f.id)
+#     return render(r,"test.html", locals())

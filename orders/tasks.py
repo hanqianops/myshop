@@ -1,12 +1,10 @@
-from celery import task
+from celery import task, shared_task
 from django.core.mail import send_mail
 from .models import Order
+from django.conf import settings
 
-@task
-def add(x,y):
-    return x+y
 
-@task
+@shared_task
 def order_created(order_id):
     """
     订单创建成功后发送邮件
@@ -18,6 +16,6 @@ def order_created(order_id):
                                             order.id)
     mail_sent = send_mail(subject,
                         message,
-                        'admin@myshop.com',
+                        settings.EMAIL_HOST_USER,
                         [order.email])
     return mail_sent

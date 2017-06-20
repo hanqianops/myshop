@@ -9,7 +9,7 @@ EMAIL_USE_TLS = False
 EMAIL_PORT = 25
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_HOST_USER = 'hanqianops@163.com'
-EMAIL_HOST_PASSWORD = 'qqq111'
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'hanqianops@163.com'
 
 ########## Celery ##################

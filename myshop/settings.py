@@ -14,7 +14,7 @@ DEFAULT_FROM_EMAIL = 'hanqianops@163.com'
 
 ########## Celery ##################
 BROKER_URL = 'amqp://guest:guest@10.240.1.103//'
-RESULT_BACKEND = 'amqp://guest:guest@10.240.1.103//'
+CELERY_RESULT_BACKEND = 'amqp://guest:guest@10.240.1.103//'
 TASK_SERIALIZER = 'json'
 ACCEPT_CONTENT = ['json']
 

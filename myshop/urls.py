@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from shop import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^coupons/', include('coupons.urls', namespace='coupons')),
     url(r'^orders/', include('orders.urls', namespace='orders')),
     url(r'^cart/', include('cart.urls', namespace='cart')),  # 确保在 shop.urls 之前引用它，因为它比前者更加有限制性。
     url(r'^', include('shop.urls', namespace='shop')),

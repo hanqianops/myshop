@@ -29,9 +29,9 @@
   <ul class="object-tools">
     <li>
       <a href="#" onclick="window.print();">Print order</a>
-    </li> 
+    </li>
   </ul>
-  <table> 
+  <table>
     <tr>
       <th>Created</th>
       <td>{{ order.created }}</td>
@@ -39,7 +39,7 @@
     <tr>
       <th>Customer</th>
       <td>{{ order.first_name }} {{ order.last_name }}</td>
-    </tr> 
+    </tr>
     <tr>
       <th>E-mail</th>
       <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
@@ -48,17 +48,17 @@
     <th>Address</th>
     <td>{{ order.address }}, {{ order.postal_code }} {{ order.city
 }}</td>
-  </tr> 
+  </tr>
     <tr>
       <th>Total amount</th>
       <td>${{ order.get_total_cost }}</td>
     </tr>
     <tr>
       <th>Status</th>
-      <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td> 
+      <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
     </tr>
   </table>
-  
+
   <div class="module">
     <div class="tabular inline-related last-related">
       <table>

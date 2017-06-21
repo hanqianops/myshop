@@ -1,10 +1,11 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+from coupons.models import Coupon
 
 class Cart(object):
     """
-    可以让我们管理购物车。我们需要把购物车与一个 request 对象一同初始化
+    可以让我们管理购物车。将购物车与一个 request 对象一同初始化
     """
     def __init__(self, request):
         """
@@ -20,6 +21,9 @@ class Cart(object):
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+
+        # 优惠券
+        self.coupon_id = self.session.get('coupon_id')
 
     def add(self, product, quantity=1, update_quantity=False):
         """
@@ -91,3 +95,27 @@ class Cart(object):
         """
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
+
+    @property
+    def coupon(self):
+        """
+        返回指定ID的对象或者空
+        """
+        if self.coupon_id:
+            return Coupon.objects.get(id=self.coupon_id)
+        return None
+
+    def get_discount(self):
+        """
+        检索折扣比率，返回折扣的价格
+        """
+        if self.coupon:
+            return (self.coupon.discount / Decimal('100')) \
+                   * self.get_total_price()
+        return Decimal('0')
+
+    def get_total_price_after_discount(self):
+        """
+        返回减去折扣之后的总价
+        """
+        return self.get_total_price() - self.get_discount()

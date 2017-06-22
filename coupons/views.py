@@ -6,6 +6,9 @@ from .forms import CouponApplyForm
 
 @require_POST
 def coupon_apply(request):
+    """
+    验证优惠码是否有效
+    """
     now = timezone.now()
     form = CouponApplyForm(request.POST)
     if form.is_valid():

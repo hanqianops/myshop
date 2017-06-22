@@ -30,13 +30,11 @@ class Cart(object):
         向购物车当中添加产品或者更新产品的数量
         :param product:  需要在购物车中更新或者向购物车添加的 Product 对象
         :param quantity: 一个产品数量的可选参数。默认为 1
-        :param update_quantity: 这是一个布尔值，它表示数量是否需要按照给定的数量参数更新（True），不然新的数量必须要被加进已存在的数量中（False）
-        :return:
+        :param update_quantity: 这是一个布尔值，替换当前数量（True），指定数量+存在的数量（False）
         """
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0,
-                                     'price': str(product.price)}
+            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
@@ -46,7 +44,7 @@ class Cart(object):
     def save(self):
         """
         把购物车中所有的改动都保存到会话中
-        然后用 session.modified = True 标记改动了的会话。这是为了告诉 Django 会话已经被改动，需要将它保存起来。
+        然后用 session.modified = True 标记改动的会话。这是为了告诉 Django 会话已经被改动，需要将它保存起来。
         """
         # update the session cart
         self.session[settings.CART_SESSION_ID] = self.cart
@@ -99,7 +97,7 @@ class Cart(object):
     @property
     def coupon(self):
         """
-        返回指定ID的对象或者空
+        返回指定ID的优惠券对象或者空
         """
         if self.coupon_id:
             return Coupon.objects.get(id=self.coupon_id)
